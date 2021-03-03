@@ -489,6 +489,15 @@ pied.update_layout(paper_bgcolor='rgba(0,0,0,0)',
                   title_font_color="black",
                   #title_font_family = 'Monserrat ExtraBold' 
                    )
+
+
+
+
+
+
+
+####################################
+
 # A P P
 
 ####################################
@@ -503,29 +512,70 @@ sourceurl='https://datos.covid-19.conacyt.mx/'
 
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.DARKLY])
+
 body = html.Div([
-       html.H1("COVID-19 en México"),
-       html.H3("Secretaría de Servicios Parlamentarios, Cámara de Diputados"),
-       
-       
-       html.H4((d2)),
        html.Hr(),
-       dbc.Table.from_dataframe(patabla3), #striped=True, bordered=False, hover=True,
-       #                        style={'left': '3vw', 'top': '-75vh', 'width': '240px'})
+       ## logo/home
+
+       dbc.Row([dbc.Col(html.Div("Secretaría de Servicios Parlamentarios, Cámara de Diputados",
+                  style={'center': '12vw', 
+                         'top': '25vh', 
+                         'width': '1200px'
+                        }
+                           ))]),
+
+       dbc.Row(
+           [
+           dbc.Col(html.Div(dbc.CardImg(src="https://github.com/fdealbam/CamaraDiputados/blob/main/application/static/logocamara.jfif?raw=true",
+                  style={'right': '3vw',
+                         'top': '-75vh', 
+                         'width': '140px',
+                         'heigth': '2px'
+                        }
+                                       )#,  width=3
+                           )),
+               
+                          
+           dbc.Col(html.Div(html.H1("COVID-19 en México",
+                  style={'left': '2vw', 
+                         'top': '75vh', 
+                         'width': '600px'
+                        }
+                           )#,  width=3
+                           )),
+
+                           
+           ]),
+                   
+                   #className="w-25", top=True),# 'width': '240px'),
+       
+
+       html.H6((d2)), # fecha
+       html.Hr(),
+
+#Contagios 
+               
+       dbc.Table.from_dataframe(patabla3,# #striped=True, bordered=False, hover=True,
+                               style={'left': '3vw', 'top': '-75vh', 'width': '240px'}),
        dbc.Row([dbc.Col(html.Div(dcc.Graph(figure=figaro, config= "autosize")))]),
        dbc.Table.from_dataframe(patabla7, size= "xsm"),
        #striped=True, bordered=True, hover=True)
        html.Hr(), #Espacio
+
+#Decesos
+               
        dbc.Table.from_dataframe(patabla3a), 
        dbc.Row([dbc.Col(html.Div(dcc.Graph(figure=figaro2, config= "autosize")))]),
        dbc.Table.from_dataframe(patabla7a, size= "xsm"),
        html.Hr(),
+
        html.H1('Las 10 entidades con más... '),
        dbc.Row([dbc.Col(html.Div(dcc.Graph(figure=g10edosc, config= "autosize")))]), #Contagios
        dbc.Row([dbc.Col(html.Div(dcc.Graph(figure=g10edosct,config= "autosize")))]), #TasaCont.
        dbc.Row([dbc.Col(html.Div(dcc.Graph(figure=g10edosd, config= "autosize")))]), #Decesos
        dbc.Row([dbc.Col(html.Div(dcc.Graph(figure=g10edosdt,config= "autosize")))]), #TasaLetalidad
        html.Hr(),
+
        html.H1('Alrededor de 60% de casos se concentran en... '),
        html.H3("Contagios"),
        dbc.Row([dbc.Col(html.Div(dcc.Graph(figure=piec,config= "autosize")))]),
