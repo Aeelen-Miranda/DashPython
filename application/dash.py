@@ -467,9 +467,9 @@ piec.update_layout(paper_bgcolor='rgba(0,0,0,0)',
                   width= 550,
                   height=550,
                   title_font_size = 12,
-                  font_color="black",
-                  title_font_color="firebrick",
-                  #title_font_family = 'Monserrat ExtraBold' 
+                  font_color="white",
+                  title_font_color="white",
+                  title_font_family = 'Monserrat ExtraBold' 
                    )
 
 
@@ -492,9 +492,9 @@ pied.update_layout(paper_bgcolor='rgba(0,0,0,0)',
                   width= 425,
                   height=400,
                   title_font_size = 15,
-                  font_color="black",
-                  title_font_color="black",
-                  #title_font_family = 'Monserrat ExtraBold' 
+                  font_color="white",
+                  title_font_color="white",
+                  title_font_family = 'Monserrat ExtraBold' 
                    )
 
 
