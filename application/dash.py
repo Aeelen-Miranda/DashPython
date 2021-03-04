@@ -556,7 +556,7 @@ body = html.Div([
        #    [
                
                           
-           dbc.Col(html.Div("COVID-19 en México",
+           dbc.Col(html.H1("COVID-19 en México",
                   style={#'left': '2vw', 
                          #'top': '75vh', 
                          #'width': '1200px',
