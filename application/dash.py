@@ -41,6 +41,7 @@ autores = ('https://raw.githubusercontent.com/winik-pg/exercises_pythoncitos/mas
 
 
 
+
 # TRATAMIENTO 
 ###############################   Contagios  por día
 
@@ -291,6 +292,12 @@ figaro2.update_layout(
     #width=1000,
     #height=400
     )
+#Informe Técnico Diario COVID-19 MÉXICO 15/09/2020
+#19:00 Hrs
+# Se consideran casos activos, aquellos casos positivos que iniciaron síntomas en los últimos 14 días, permitiendo
+#identificar una mayor actividad viral y por consecuencia aumento en la transmisión. La siguiente gráfica presenta
+#los casos activos por entidad federativa donde existe mayor activad viral. 
+
 
 ############################### 1 Titulo Contagios totales 
 patabla2 = {'Contagios': [str(f"{contagiostotal:,d}")] }    
@@ -517,38 +524,55 @@ body = html.Div([
        html.Hr(),
        ## logo/home
 
-       dbc.Row([dbc.Col(html.Div("Secretaría de Servicios Parlamentarios, Cámara de Diputados",
-                  style={'center': '12vw', 
-                         'top': '25vh', 
-                         'width': '1200px'
-                        }
-                           ))]),
-
-       dbc.Row(
-           [
+       dbc.Row([
+           
            dbc.Col(html.Div(dbc.CardImg(src="https://github.com/fdealbam/CamaraDiputados/blob/main/application/static/logocamara.jfif?raw=true",
-                  style={'right': '3vw',
-                         'top': '-75vh', 
-                         'width': '140px',
-                         'heigth': '2px'
+                  style={#'right': '3',
+                         #'top': '-75vh', 
+                         'width': '160px',
+                         #'heigth': '1px',
+                         #'size' : 3,
+                         #'offset' : 6,
+                      
+                         #'order' : "first"
                         }
                                        )#,  width=3
                            )),
+           
+           
+           dbc.Col(html.Div("Secretaría de Servicios Parlamentarios, Cámara de Diputados",
+                  style={#'left': '-4vw', 
+                         #'top': '25vh', 
+                         'width': '120px',
+                         #'size' : 3,
+                         'offset' : 4,
+                         #'order' : "second"
+                      
+                        }
+                           )),
+              # ]),
+
+       #dbc.Row(
+       #    [
                
                           
-           dbc.Col(html.Div(html.H1("COVID-19 en México",
-                  style={'left': '2vw', 
-                         'top': '75vh', 
-                         'width': '600px'
+           dbc.Col(html.Div("COVID-19 en México",
+                  style={#'left': '2vw', 
+                         #'top': '75vh', 
+                         #'width': '1200px',
+                         'size' : 6,
+                         'offset' : 4,
+
                         }
                            )#,  width=3
-                           )),
+                   ),]),
 
                            
-           ]),
+           
                    
                    #className="w-25", top=True),# 'width': '240px'),
        
+       html.Hr(),
 
        html.H6((d2)), # fecha
        html.Hr(),
