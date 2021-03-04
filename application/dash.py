@@ -534,7 +534,7 @@ body = html.Div([
                          #'size' : 3,
                          #'offset' : 6,
                       
-                         #'order' : "first"
+                         'order': 1
                         }
                                        )#,  width=3
                            )),
@@ -546,7 +546,7 @@ body = html.Div([
                          'width': '120px',
                          #'size' : 3,
                          'offset' : 4,
-                         #'order' : "second"
+                         'order': 2
                       
                         }
                            )),
