@@ -41,7 +41,6 @@ autores = ('https://raw.githubusercontent.com/winik-pg/exercises_pythoncitos/mas
 
 
 
-
 # TRATAMIENTO 
 ###############################   Contagios  por día
 
@@ -292,12 +291,6 @@ figaro2.update_layout(
     #width=1000,
     #height=400
     )
-#Informe Técnico Diario COVID-19 MÉXICO 15/09/2020
-#19:00 Hrs
-# Se consideran casos activos, aquellos casos positivos que iniciaron síntomas en los últimos 14 días, permitiendo
-#identificar una mayor actividad viral y por consecuencia aumento en la transmisión. La siguiente gráfica presenta
-#los casos activos por entidad federativa donde existe mayor activad viral. 
-
 
 ############################### 1 Titulo Contagios totales 
 patabla2 = {'Contagios': [str(f"{contagiostotal:,d}")] }    
@@ -451,7 +444,7 @@ g10edosdt.update_layout(
    
    
         ))
-#g10edosdt.update_traces(textposition='inside',  textinfo='label')
+
 ############################### Gráfica Pie de Contagios por estado
 
 piec = px.pie(contaedog, values='total', names='Nom_Ent',
@@ -467,9 +460,9 @@ piec.update_layout(paper_bgcolor='rgba(0,0,0,0)',
                   width= 550,
                   height=550,
                   title_font_size = 12,
-                  font_color="white",
-                  title_font_color="white",
-                  title_font_family = 'Monserrat ExtraBold' 
+                  font_color="black",
+                  title_font_color="firebrick",
+                  #title_font_family = 'Monserrat ExtraBold' 
                    )
 
 
@@ -492,9 +485,9 @@ pied.update_layout(paper_bgcolor='rgba(0,0,0,0)',
                   width= 425,
                   height=400,
                   title_font_size = 15,
-                  font_color="white",
-                  title_font_color="white",
-                  title_font_family = 'Monserrat ExtraBold' 
+                  font_color="black",
+                  title_font_color="black",
+                  #title_font_family = 'Monserrat ExtraBold' 
                    )
 
 
@@ -524,69 +517,50 @@ body = html.Div([
        html.Hr(),
        ## logo/home
 
-       dbc.Row([
-           
-           dbc.Col(html.Div(dbc.CardImg(src="https://github.com/fdealbam/CamaraDiputados/blob/main/application/static/logocamara.jfif?raw=true",
-                  style={#'right': '3',
-                         #'top': '-75vh', 
-                         'width': '160px',
-                         #'heigth': '1px',
-                         #'size' : 3,
-                         #'offset' : 6,
-                      
-                         'order': 1
-                        }
-                                       )#,  width=3
-                           )),
-           
-           
-           dbc.Col(html.Div("Secretaría de Servicios Parlamentarios, Cámara de Diputados",
-                  style={#'left': '-4vw', 
-                         #'top': '25vh', 
-                         'width': '120px',
-                         #'size' : 3,
-                         'offset' : 4,
-                         'order': 2
-                      
-                        }
-                           )),
-              # ]),
+       dbc.Row(
+           [
+           dbc.Col(html.H1("COVID-19 en México"),
+                  width={#'Center': '2vw', 
+                         #'top': '75vh', 
+                         #'width': '1200px',
+                         'size' : 9,
+                         'offset' : 3,
+                        })
+                   ,]),
 
-       #dbc.Row(
-       #    [
-               
-                          
-           dbc.Col(html.H1("COVID-19 en México",
-                  style={#'left': '2vw', 
+# Fecha de actualización
+         dbc.Row(
+           [
+           dbc.Col(html.H6(d2),
+               width={#'Center': '2vw', 
                          #'top': '75vh', 
                          #'width': '1200px',
                          'size' : 6,
                          'offset' : 4,
-
-                        }
-                           )#,  width=3
-                   ),]),
-
-                           
-           
+                        }), # fecha
+                   ]),
                    
-                   #className="w-25", top=True),# 'width': '240px'),
-       
+    
        html.Hr(),
 
-       html.H6((d2)), # fecha
-       html.Hr(),
-
+#################################### Franja CONTAGIOS    
 #Contagios 
                
        dbc.Table.from_dataframe(patabla3,# #striped=True, bordered=False, hover=True,
-                               style={'left': '3vw', 'top': '-75vh', 'width': '240px'}),
+                               style={#'left': '3vw', 'top': '-75vh', 
+                                   'width': '1200px',
+                                   'size' : 2,
+
+                               }),
+    
        dbc.Row([dbc.Col(html.Div(dcc.Graph(figure=figaro, config= "autosize")))]),
        dbc.Table.from_dataframe(patabla7, size= "xsm"),
        #striped=True, bordered=True, hover=True)
        html.Hr(), #Espacio
 
-#Decesos
+    
+#################################### Franja DECESOS    
+#Decesos 
                
        dbc.Table.from_dataframe(patabla3a), 
        dbc.Row([dbc.Col(html.Div(dcc.Graph(figure=figaro2, config= "autosize")))]),
@@ -594,10 +568,18 @@ body = html.Div([
        html.Hr(),
 
        html.H1('Las 10 entidades con más... '),
-       dbc.Row([dbc.Col(html.Div(dcc.Graph(figure=g10edosc, config= "autosize")))]), #Contagios
-       dbc.Row([dbc.Col(html.Div(dcc.Graph(figure=g10edosct,config= "autosize")))]), #TasaCont.
-       dbc.Row([dbc.Col(html.Div(dcc.Graph(figure=g10edosd, config= "autosize")))]), #Decesos
-       dbc.Row([dbc.Col(html.Div(dcc.Graph(figure=g10edosdt,config= "autosize")))]), #TasaLetalidad
+       dbc.Row([dbc.Col(html.Div(dcc.Graph(figure=g10edosc, 
+                                           style={"size":0,
+                                           #config: "autosize"
+                                                 }
+                                          )))]), #Contagios
+       dbc.Row([dbc.Col(html.Div(dcc.Graph(figure=g10edosct,
+                                           style={"size":3,
+                                           #config: "autosize"
+                                                 }
+                                          )))]), #TasaCont.
+       dbc.Row([dbc.Col(html.Div(dcc.Graph(figure=g10edosd, config= 3)))]), #Decesos
+       dbc.Row([dbc.Col(html.Div(dcc.Graph(figure=g10edosdt,config= 4)))]), #TasaLetalidad
        html.Hr(),
 
        html.H1('Alrededor de 60% de casos se concentran en... '),
@@ -605,12 +587,47 @@ body = html.Div([
        dbc.Row([dbc.Col(html.Div(dcc.Graph(figure=piec,config= "autosize")))]),
        html.H3("Decesos"),
        dbc.Row([dbc.Col(html.Div(dcc.Graph(figure=pied,config= "autosize")))]),
+
+       html.Hr(),
+       html.Hr(),
+
+       dbc.Row([
+           
+           dbc.Col(html.Div(dbc.CardImg(src="https://github.com/fdealbam/CamaraDiputados/blob/main/application/static/logocamara.jfif?raw=true",
+                  style={#'center': '3',
+                         'bottom': '25vh', 
+                         'width': '120px',
+                         #'heigth': '1px',
+                         'size' : 2,
+                         'offset' : 2,
+                      
+                         #'order' : "first"
+                        }
+                                       )#,  width=3
+                           )),
+           
+           
+           dbc.Col(html.H6("Secretaría General, " 
+                           " Secretaría de Servicios Parlamentarios, "
+                           " Cámara de Diputados"),
+                  width={'center': '-4vw', 
+                         'top': '75vh', 
+                         'width': '120px',
+                         'size' : 12,
+                         'offset' : 2,
+                         #'order' : "second"
+                      
+                        }),
+               ]),
+
+
+
 ])
 
 app.layout = html.Div([body])
 
-from application.dash import app
-from settings import config
+#from application.dash import app
+#from settings import config
 
 if __name__ == "__main__":
     app.run_server()
