@@ -451,7 +451,7 @@ g10edosdt.update_layout(
    
    
         ))
-
+g10edosdt.update_traces(textposition='inside',  textinfo='label')
 ############################### Gráfica Pie de Contagios por estado
 
 piec = px.pie(contaedog, values='total', names='Nom_Ent',
