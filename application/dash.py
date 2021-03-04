@@ -515,93 +515,143 @@ app = dash.Dash(__name__, external_stylesheets=[dbc.themes.DARKLY])
 
 body = html.Div([
        html.Hr(),
-       ## logo/home
 
+# Title
        dbc.Row(
-           [
-           dbc.Col(html.H1("COVID-19 en México"),
-                  width={#'Center': '2vw', 
-                         #'top': '75vh', 
-                         #'width': '1200px',
-                         'size' : 9,
+           [dbc.Col(html.H1("COVID-19 en México"),
+                  width={'size' : "auto",
                          'offset' : 3,
-                        })
-                   ,]),
+                         'colors' : 'light'
+           }),
+           ]),
 
 # Fecha de actualización
-         dbc.Row(
-           [
-           dbc.Col(html.H6(d2),
-               width={#'Center': '2vw', 
-                         #'top': '75vh', 
-                         #'width': '1200px',
-                         'size' : 6,
-                         'offset' : 4,
-                        }), # fecha
-                   ]),
-                   
+    
+       dbc.Row(
+           [dbc.Col(html.H6(d2 ),
+               width={'size' : "auto",
+                         'offset' : 3,
+            }), 
+            ]),
     
        html.Hr(),
 
+    
 #################################### Franja CONTAGIOS    
 #Contagios 
-               
-       dbc.Table.from_dataframe(patabla3,# #striped=True, bordered=False, hover=True,
-                               style={#'left': '3vw', 'top': '-75vh', 
-                                   'width': '1200px',
-                                   'size' : 2,
-
-                               }),
-    
+       # Suma total de contagios    
+      dbc.Row(
+           [dbc.Col(html.H4("Contagios"),
+                  width={'size' : "auto",'offset' : 3,'colors' : 'light'}),]),
+     dbc.Row(
+           [
+            dbc.Col(html.H2([str(f"{contagiostotal:,d}")]),
+               width={'size' : "auto",'offset' : 3,}), 
+               ]),
+           
+       # Grafica de contagios    
        dbc.Row([dbc.Col(html.Div(dcc.Graph(figure=figaro, config= "autosize")))]),
-       dbc.Table.from_dataframe(patabla7, size= "xsm"),
-       #striped=True, bordered=True, hover=True)
-       html.Hr(), #Espacio
+       
+    dbc.Row(
+           [
+               dbc.Col(html.Div(html.H5("Promedio mensual")))]
+           ),
+           
+       # Tabla de contagios mensuales
+       dbc.Row(
+           [
+               dbc.Col(dbc.Table.from_dataframe(patabla7),)]),
+       html.Hr(), 
 
     
 #################################### Franja DECESOS    
 #Decesos 
-               
-       dbc.Table.from_dataframe(patabla3a), 
+
+       # Suma total de contagios    
+       dbc.Row(
+           [dbc.Col(html.H4("Decesos"),
+                  width={'size' : "auto",'offset' : 3,'colors' : 'light'}),]),
+       dbc.Row(
+           [
+            dbc.Col(html.H2([str(f"{decesos_tot:,d}")]),
+               width={'size' : "auto",'offset' : 3,}), 
+               ]),
+
+       # Grafica de decesos    
        dbc.Row([dbc.Col(html.Div(dcc.Graph(figure=figaro2, config= "autosize")))]),
-       dbc.Table.from_dataframe(patabla7a, size= "xsm"),
+       dbc.Row(
+           [
+               dbc.Col(html.Div(html.H5("Promedio mensual")))]
+           ),
+
+       # Tabla de decesos mensuales
+       dbc.Row(
+           [
+               dbc.Col(dbc.Table.from_dataframe(patabla7a, size= "xsm"))]),
        html.Hr(),
 
+    
+#################################### Franja Los RANKINGS    
+# los rankings 
+    
        html.H1('Las 10 entidades con más... '),
-       dbc.Row([dbc.Col(html.Div(dcc.Graph(figure=g10edosc, 
-                                           style={"size":0,
-                                           #config: "autosize"
-                                                 }
-                                          )))]), #Contagios
-       dbc.Row([dbc.Col(html.Div(dcc.Graph(figure=g10edosct,
-                                           style={"size":3,
-                                           #config: "autosize"
-                                                 }
-                                          )))]), #TasaCont.
-       dbc.Row([dbc.Col(html.Div(dcc.Graph(figure=g10edosd, config= 3)))]), #Decesos
-       dbc.Row([dbc.Col(html.Div(dcc.Graph(figure=g10edosdt,config= 4)))]), #TasaLetalidad
+       dbc.Row(
+           [
+           dbc.Col(html.Div(dcc.Graph(figure=g10edosc, 
+                               style={"size":0,
+                                          }))), 
+       
+           dbc.Col(html.Div(dcc.Graph(figure=g10edosct,
+                                style={"size":3,
+                                          }))),
+
+           dbc.Col(html.Div(dcc.Graph(figure=g10edosd, 
+                                style={"size":6,
+                                          }))),
+
+           dbc.Col(html.Div(dcc.Graph(figure=g10edosdt,
+                                style={"size":9,
+                                          }))),
+           ]),
+    
        html.Hr(),
 
-       html.H1('Alrededor de 60% de casos se concentran en... '),
-       html.H3("Contagios"),
-       dbc.Row([dbc.Col(html.Div(dcc.Graph(figure=piec,config= "autosize")))]),
-       html.H3("Decesos"),
-       dbc.Row([dbc.Col(html.Div(dcc.Graph(figure=pied,config= "autosize")))]),
+ #################################### Franja Los PIES    
+# Distribución de contagios y decesos 
+   
+    
+       html.H4('Alrededor de 60% de casos se concentran en... '),
+       dbc.Row(
+           [
+           dbc.Col(html.H5("Contagios")),
+           dbc.Col(html.H5("Decesos")),
+           ]),     
 
+       dbc.Row([
+           dbc.Col(html.Div(dcc.Graph(figure=piec,
+                                 style={"size":8,
+                                        "offset": 0
+                                          }))),
+
+           dbc.Col(html.Div(dcc.Graph(figure=pied,
+                                 style={"size":3,
+                                        "offset": 9, 
+                                        
+                                          }))),
+           ]),
+    
        html.Hr(),
        html.Hr(),
 
        dbc.Row([
            
            dbc.Col(html.Div(dbc.CardImg(src="https://github.com/fdealbam/CamaraDiputados/blob/main/application/static/logocamara.jfif?raw=true",
-                  style={#'center': '3',
-                         'bottom': '25vh', 
-                         'width': '120px',
+                  style={
+                         #'bottom': '25vh', 
+                         'width': '60px',
                          #'heigth': '1px',
                          'size' : 2,
-                         'offset' : 2,
-                      
-                         #'order' : "first"
+                         'offset' : 0,
                         }
                                        )#,  width=3
                            )),
@@ -610,15 +660,15 @@ body = html.Div([
            dbc.Col(html.H6("Secretaría General, " 
                            " Secretaría de Servicios Parlamentarios, "
                            " Cámara de Diputados"),
-                  width={'center': '-4vw', 
-                         'top': '75vh', 
-                         'width': '120px',
-                         'size' : 12,
-                         'offset' : 2,
+                  width={#'center': '-4vw', 
+                         #'top': '75vh', 
+                         #'width': '120px',
+                         'size' : 9,
+                         'offset' : 1,
                          #'order' : "second"
                       
                         }),
-               ]),
+               ], justify="left",),
 
 
 
