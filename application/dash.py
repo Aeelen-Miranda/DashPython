@@ -506,7 +506,6 @@ pied.update_layout(paper_bgcolor='rgba(0,0,0,0)',
 
 
 
-
 ####################################
 
 # A P P
@@ -574,7 +573,11 @@ body = html.Div([
        # Tabla de contagios mensuales
        dbc.Row(
            [
-               dbc.Col(dbc.Table.from_dataframe(patabla7),)]),
+               dbc.Col(dbc.Table.from_dataframe(patabla7,
+                      # striped=True, bordered=True, hover=True, 
+                                                dark=True,)
+                      
+)]),
        html.Hr(), 
 
     
@@ -603,7 +606,8 @@ body = html.Div([
        # Tabla de decesos mensuales
        dbc.Row(
            [
-               dbc.Col(dbc.Table.from_dataframe(patabla7a, size= "xsm"))]),
+               dbc.Col(dbc.Table.from_dataframe(patabla7a,
+                                               dark=True,))]),
        html.Hr(),
        html.Hr(),
 
