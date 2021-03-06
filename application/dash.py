@@ -526,8 +526,8 @@ sourceurl='https://datos.covid-19.conacyt.mx/'
 
 
 
-
-app = dash.Dash(__name__, external_stylesheets=[dbc.themes.FLATLY])
+server = flask.Flask(__name__)
+app = dash.Dash(__name__, external_stylesheets=[dbc.themes.FLATLY], server=server)
 
 body = html.Div([
        html.Hr(),
@@ -701,8 +701,8 @@ body = html.Div([
 
 app.layout = html.Div([body])
 
-#from application.dash import app
-#from settings import config
+from application.dash import app
+from settings import config
 
 if __name__ == "__main__":
     app.run_server()
