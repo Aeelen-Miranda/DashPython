@@ -36,6 +36,7 @@ contagios = pd.read_csv("https://datos.covid-19.conacyt.mx/Downloads/Files/Casos
 decesos = pd.read_csv("https://datos.covid-19.conacyt.mx/Downloads/Files/Casos_Diarios_Municipio_Defunciones_%s.csv" %(yea))
 SS = ('https://datos.covid-19.conacyt.mx/')
 autores = ('https://raw.githubusercontent.com/winik-pg/exercises_pythoncitos/master/Autores.docx')
+entidades  =  pd.read_csv("https://raw.githubusercontent.com/plotly/datasets/master/us-cities-top-1k.csv" )
 
 
 
@@ -251,6 +252,7 @@ deceedosg = deceedos.stb.freq(['Nom_Ent'],value='total', thresh=60, other_label=
 #############################################
 # G R A F I C A S 
 ############################################# Grafica1
+
 figaro = go.Figure()
 figaro.add_trace(go.Bar(x=contagios2['days'],y=contagios2['cases'],
                 #name='Contagios confirmados COVID-19',
@@ -399,6 +401,8 @@ g10edosct.update_layout(
         titlefont_family= 'Monserrat ExtraBold',
         ))
 
+
+
 ############################################################ 3 Decesos
 g10edosd = go.Figure()
 g10edosd.add_trace(go.Bar(x=deceedos['total'],y=contaedos['Nom_Ent'],
@@ -459,7 +463,8 @@ g10edosdt.update_layout(
 ############################### Gráfica PIE de Contagios por estado
 
 piec = px.pie(contaedog, values='total', names='Nom_Ent',
-             color_discrete_sequence=px.colors.sequential.Reds,
+             color_discrete_sequence=px.colors.sequential.Reds, hole=.4
+              ,
              #title='Distribución de contagios',
              )
 piec.update_layout(paper_bgcolor='rgba(0,0,0,0)',
@@ -475,12 +480,13 @@ piec.update_layout(paper_bgcolor='rgba(0,0,0,0)',
                   title_font_color="firebrick",
                   #title_font_family = 'Monserrat ExtraBold' 
                    )
+#ec.update.traces(hole=.5,)
 
 
 ############################### Gráfica Pie de Deceso por estado
 
 pied = px.pie(deceedosg, values='total', names='Nom_Ent',
-             color_discrete_sequence=px.colors.sequential.Greys,
+             color_discrete_sequence=px.colors.sequential.Greys, hole=.4,
              #title='      Decesos',
              #titlefont_size = 15,
              #font_family = 'Monserrat ExtraBold'
@@ -501,7 +507,7 @@ pied.update_layout(paper_bgcolor='rgba(0,0,0,0)',
                   #title_font_family = 'Monserrat ExtraBold' 
                    )
 
-
+########################################## MAPA
 
 
 
@@ -574,10 +580,11 @@ body = html.Div([
        dbc.Row(
            [
                dbc.Col(dbc.Table.from_dataframe(patabla7,
-                      # striped=True, bordered=True, hover=True, 
-                                                dark=True,)
+                       striped=True),
+                       
                       
-)]),
+          )]),
+    
        html.Hr(), 
 
     
@@ -607,7 +614,8 @@ body = html.Div([
        dbc.Row(
            [
                dbc.Col(dbc.Table.from_dataframe(patabla7a,
-                                               dark=True,))]),
+                                               striped=True)
+                      )]),
        html.Hr(),
        html.Hr(),
 
@@ -630,11 +638,11 @@ body = html.Div([
                                           }))),
 
            dbc.Col(html.Div(dcc.Graph(figure=g10edosd, 
-                                style={"size":6,
+                                style={"size":6
                                           }))),
 
            dbc.Col(html.Div(dcc.Graph(figure=g10edosdt,
-                                style={"size":9,
+                                style={"size":9
                                           }))),
            ]),
     
@@ -679,11 +687,11 @@ body = html.Div([
        dbc.Row([
            
            dbc.Col(dbc.CardImg(src="https://github.com/fdealbam/CamaraDiputados/blob/main/application/static/logocamara.jfif?raw=true"),
-                        width=4, lg={'size': 1,  "offset": 4, }),
+                        width=4, lg={'size': 1,  "offset": 3, }),
            
-           dbc.Col(html.H6("Secretaría General, " 
+           dbc.Col(html.H6(" S e c r e t a r í a    G e n e r a l," 
                            " Secretaría de Servicios Parlamentarios, "
-                           " Cámara de Diputados"),
+                           " México, 2021 "),
                   width={'size': 3, 'offset': 0}),
                ], justify="start",),
 
@@ -693,8 +701,8 @@ body = html.Div([
 
 app.layout = html.Div([body])
 
-from application.dash import app
-from settings import config
+#from application.dash import app
+#from settings import config
 
 if __name__ == "__main__":
     app.run_server()
